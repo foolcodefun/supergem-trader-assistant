@@ -1,7 +1,8 @@
-# 檔案: src/data_fetcher.py
-import yfinance as yf
 import pandas as pd
-from errors import DataFetchError # 導入我們剛建立的自訂錯誤
+import yfinance as yf
+
+from errors import DataFetchError  # 導入我們剛建立的自訂錯誤
+
 
 # 這裡的 : str 和 -> pd.DataFrame 就是「型別提示 (Type Hinting)」
 # 這是給 VS Code (Pylance) 看的「君子協定」
@@ -16,7 +17,7 @@ def get_raw_data(ticker_symbol: str) -> pd.DataFrame:
         ticker = yf.Ticker(ticker_symbol)
 
         # 這是 TDD 測試中 'mock_ticker.history' 被呼叫的地方
-        data = ticker.history(period="1y") 
+        data = ticker.history(period="1y")
 
         if data.empty:
             # 這是 'test_get_raw_data_failure_empty' 所測試的情境

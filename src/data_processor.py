@@ -1,6 +1,6 @@
-# 檔案: src/data_processor.py
 import pandas as pd
-import pandas_ta as ta
+import pandas_ta as ta  # noqa: F401 (for Flake8) pyright: ignore[reportUnusedVariable]
+
 
 def add_technical_indicators(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -12,7 +12,7 @@ def add_technical_indicators(df: pd.DataFrame) -> pd.DataFrame:
     """
 
     # 複製一份 DataFrame, 避免修改到原始傳入的 data
-    # (這叫做「無副作用 (No Side-effects)」, 
+    # (這叫做「無副作用 (No Side-effects)」,
     #  是 'Effective Python' 的核心原則)
     data = df.copy()
 
@@ -20,21 +20,21 @@ def add_technical_indicators(df: pd.DataFrame) -> pd.DataFrame:
 
     # (BDD: 5MA, 20MA, 60MA, 120MA)
     # .ta.sma() 會自動尋找 'Close' 欄位來計算
-    data.ta.sma(length=5, append=True, col_names='5MA')
-    data.ta.sma(length=20, append=True, col_names='20MA')
-    data.ta.sma(length=60, append=True, col_names='60MA')
-    data.ta.sma(length=120, append=True, col_names='120MA')
+    data.ta.sma(length=5, append=True, col_names="5MA")
+    data.ta.sma(length=20, append=True, col_names="20MA")
+    data.ta.sma(length=60, append=True, col_names="60MA")
+    data.ta.sma(length=120, append=True, col_names="120MA")
 
     # (BDD: RSI)
-    data.ta.rsi(length=14, append=True, col_names='RSI')
+    data.ta.rsi(length=14, append=True, col_names="RSI")
 
     # --- 2. 計算 BDD 規格中的量能指標 ---
 
     # (BDD: 20MA_Volume)
     # .ta.sma() 可以指定要計算的欄位 (on='Volume')
-    data.ta.sma(length=20, on='Volume', append=True, col_names='20MA_Volume')
+    data.ta.sma(length=20, on="Volume", append=True, col_names="20MA_Volume")
 
-    # (TDD 測試 'test_add_technical_indicators' 
+    # (TDD 測試 'test_add_technical_indicators'
     #  會自動驗證這些欄位是否都已成功新增)
 
     return data
