@@ -1,0 +1,14 @@
+[flake8]
+# 1. 告訴 Flake8 聽 Black 的行長度 (88)
+max-line-length = 88
+
+# 2. 忽略一個 Black 和 Flake8 之間已知的「衝突」
+extend-ignore = E203
+
+# 3. 告訴 Flake8 也不要去檢查「雜訊」資料夾
+exclude = 
+    .venv,
+    __pycache__,
+    .git,
+    .pytest_cache,
+    .vscode
